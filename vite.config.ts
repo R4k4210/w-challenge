@@ -35,6 +35,14 @@ export default defineConfig({
         find: "@enums",
         replacement: fileURLToPath(new URL("./src/enums", import.meta.url)),
       },
+      {
+        find: "@config",
+        replacement: fileURLToPath(new URL("./src/config", import.meta.url)),
+      },
+      {
+        find: "@slices",
+        replacement: fileURLToPath(new URL("./src/redux/slices", import.meta.url)),
+      },
     ],
   },
 });

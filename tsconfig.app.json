@@ -32,6 +32,8 @@
       "@hooks/*": ["./src/hooks/*"],
       "@pages/*": ["./src/pages/*"],
       "@constants/*": ["./src/constants/*"],
+      "@config/*": ["./src/config/*"],
+      "@slices/*": ["./src/redux/slices/*"],
       "@enums/*": ["./src/enums/*"]
     }
 

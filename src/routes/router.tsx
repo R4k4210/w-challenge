@@ -1,5 +1,5 @@
 import { Navigate, createBrowserRouter } from "react-router-dom";
-import { HOME, CONNECT } from "@constants/routes";
+import { HOME, CONNECT } from "@constants";
 import PrivateRoute from "@shared/private-route";
 import Home from "@pages/home";
 import Connect from "@pages/connect";

@@ -1,23 +1,24 @@
 import { EButtonVariants } from "@enums";
-import { Button as MuiButton } from "@mui/material";
+import { Button as MuiButton, ButtonProps as MuiButtonProps } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 
-interface ButtonProps {
+interface ButtonProps extends MuiButtonProps {
   variant?: EButtonVariants;
-  text: string;
+  children?: React.ReactNode;
 }
 
-const Button = ({ variant = EButtonVariants.CONTAINED, text }: ButtonProps) => {
+const Button = ({ variant = EButtonVariants.CONTAINED, children, ...rest }: ButtonProps) => {
   const theme = useTheme();
 
   return (
     <MuiButton
+      {...rest}
       variant={variant}
       sx={{
         fontWeight: "bold",
         fontFamily: theme.typography.fontFamily,
       }}>
-      {text}
+      {children}
     </MuiButton>
   );
 };

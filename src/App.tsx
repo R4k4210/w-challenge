@@ -1,14 +1,11 @@
-import { RouterProvider } from "react-router-dom";
-import { router } from "./routes/router";
-import { ThemeProvider } from "@mui/material";
 import { Bounce, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import theme from "./muiTheme";
+import "@rainbow-me/rainbowkit/styles.css";
+import Providers from "@config/Providers";
 
-function App() {
+const App = () => {
   return (
-    <ThemeProvider theme={theme}>
-      <RouterProvider router={router}/>
+    <Providers>
       <ToastContainer
         role="alert"
         position="bottom-right"
@@ -22,8 +19,8 @@ function App() {
         pauseOnHover
         transition={Bounce}
       />
-    </ThemeProvider>
-  )
-}
+    </Providers>
+  );
+};
 
 export default App;
