@@ -33,8 +33,8 @@ const Home = () => {
             display: "grid",
             gridTemplateColumns: "repeat(auto-fill, minmax(20rem, 1fr))",
           }}>
-          {networks.map((network) => (
-            <Erc20Transfer key={network.name} name={network.name} address={network.address} />
+          {networks.map(({ name, address, formatUnits }) => (
+            <Erc20Transfer key={name} name={name} address={address} formatUnits={formatUnits} />
           ))}
         </Grid>
       </Grid>

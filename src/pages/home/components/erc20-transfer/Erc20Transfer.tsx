@@ -13,7 +13,7 @@ interface Erc20TransferProps {
 const Erc20Transfer = ({ name, address, formatUnits }: Erc20TransferProps) => {
   const theme = useTheme();
 
-  const { allowance, isLoading } = useAllowance(address, formatUnits);
+  const { allowance, balance, isLoading } = useAllowance(address, formatUnits);
 
   const [amount, setAmount] = useState("");
 
@@ -28,6 +28,18 @@ const Erc20Transfer = ({ name, address, formatUnits }: Erc20TransferProps) => {
           <Typography variant="h6" color={theme.palette.primary.main}>
             {name}
           </Typography>
+        </Grid>
+        <Grid item sx={{ display: "flex", alignItems: "center" }}>
+          <Box component="span" width="100px" mr={2}>
+            <Typography variant="body1" color={theme.palette.primary.main}>
+              Balance
+            </Typography>
+          </Box>
+          <Box component="span">
+            <Typography variant="body1" color={theme.palette.primary.main}>
+              {isLoading ? "Loading..." : balance}
+            </Typography>
+          </Box>
         </Grid>
         <Grid item sx={{ display: "flex", alignItems: "center" }}>
           <Box component="span" width="100px" mr={2}>

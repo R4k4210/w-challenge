@@ -16,13 +16,23 @@ const useAllowance = (contract: string, units: number) => {
         functionName: "allowance",
         args: [address, target],
       },
+      {
+        address: contract as Address,
+        abi: abi,
+        functionName: "balanceOf",
+        args: [address],
+      },
     ],
   });
 
-  const humizedData = data?.[0]?.result ? formatUnits(data[0].result as bigint, units) : 0;
+  console.log("data", data);
+
+  const humizedAllowance = data?.[0]?.result ? formatUnits(data[0].result as bigint, units) : 0;
+  const humaizedBalance = data?.[1]?.result ? formatUnits(data[1].result as bigint, units) : 0;
 
   return {
-    allowance: humizedData,
+    allowance: humizedAllowance,
+    balance: humaizedBalance,
     isLoading,
     isError,
   };
