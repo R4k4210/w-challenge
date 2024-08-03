@@ -1,5 +1,27 @@
 import { createTheme } from "@mui/material/styles";
 
+declare module "@mui/material/styles" {
+  interface Palette {
+    disabled: Palette["primary"];
+  }
+
+  interface PaletteOptions {
+    disabled?: PaletteOptions["primary"];
+  }
+
+  interface PaletteColor {
+    disabled?: string;
+  }
+
+  interface SimplePaletteColorOptions {
+    disabled?: string;
+  }
+
+  interface BreakpointOverrides {
+    xxl: true;
+  }
+}
+
 const theme = createTheme({
   palette: {
     primary: {
@@ -7,6 +29,7 @@ const theme = createTheme({
       main: "#502f54",
       dark: "#0e152c",
       contrastText: "#fdb05e",
+      disabled: "#c4c4c4",
     },
     secondary: {
       light: "#ff7961",
@@ -22,6 +45,7 @@ const theme = createTheme({
       md: 900,
       lg: 1358,
       xl: 1530,
+      xxl: 1920,
     },
   },
   typography: {

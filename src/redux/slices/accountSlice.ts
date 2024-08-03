@@ -4,26 +4,31 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 export interface AccountState {
   address: string | null;
   authenticated: boolean;
+  isValidChain: boolean;
 }
 
 const initialState: AccountState = {
   address: null,
   authenticated: false,
+  isValidChain: false,
 };
 
 export const accountSlice = createSlice({
   name: "account",
   initialState,
   reducers: {
-    setAccount: (state, action: PayloadAction<string | null>) => {
+    setAddress: (state, action: PayloadAction<string | null>) => {
       state.address = action.payload;
     },
     setAuthenticated: (state, action: PayloadAction<boolean>) => {
       state.authenticated = action.payload;
     },
+    setIsValidChain: (state, action: PayloadAction<boolean>) => {
+      state.isValidChain = action.payload;
+    },
   },
 });
 
-export const { setAccount, setAuthenticated } = accountSlice.actions;
+export const { setAddress, setAuthenticated, setIsValidChain } = accountSlice.actions;
 
 export default accountSlice.reducer;

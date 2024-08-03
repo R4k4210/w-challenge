@@ -1,21 +1,35 @@
-import { useState } from "react";
+import { RootState } from "@config/store";
+import { useSelector } from "react-redux";
 import { Box, Grid, Paper, TextField, Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
+import useReadContractsData from "@hooks/useReadContractsData";
 import Button from "@shared/button";
-import useAllowance from "@hooks/useAllowance";
+import useWriteOnContracts from "@hooks/useWriteOnContracts";
 
 interface Erc20TransferProps {
   name: string;
-  address: string;
+  contract: string;
   formatUnits: number;
 }
 
-const Erc20Transfer = ({ name, address, formatUnits }: Erc20TransferProps) => {
+const Erc20Transfer = ({ name, contract, formatUnits }: Erc20TransferProps) => {
   const theme = useTheme();
+  const isValidChain = useSelector((state: RootState) => state.account.isValidChain);
+  const targetAddress = useSelector((state: RootState) => state.target.address);
 
-  const { allowance, balance, isLoading } = useAllowance(address, formatUnits);
+  const { allowance, balance, isLoading } = useReadContractsData(contract, formatUnits);
+  const {
+    amount,
+    setAmount,
+    approve,
+    transfer,
+    isLoading: isLoadingTransaction,
+    isPending,
+  } = useWriteOnContracts(contract, formatUnits);
 
-  const [amount, setAmount] = useState("");
+  const loading = isLoading || isLoadingTransaction || isPending;
+
+  const disabledButtons = !isValidChain || !targetAddress;
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setAmount(event.target.value);
@@ -59,11 +73,15 @@ const Erc20Transfer = ({ name, address, formatUnits }: Erc20TransferProps) => {
               Amount
             </Typography>
           </Box>
-          <TextField label="" variant="outlined" onChange={handleChange} />
+          <TextField type="number" value={amount} variant="outlined" onChange={handleChange} />
         </Grid>
         <Grid item sx={{ display: "flex", justifyContent: "space-between" }}>
-          <Button>Approve</Button>
-          <Button>Transfer</Button>
+          <Button disabled={disabledButtons} isLoading={isLoading} minWidth={120} onClick={approve}>
+            Approve
+          </Button>
+          <Button disabled={disabledButtons} isLoading={loading} minWidth={120} onClick={transfer}>
+            Transfer
+          </Button>
         </Grid>
       </Grid>
     </Box>

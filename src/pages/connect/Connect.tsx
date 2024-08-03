@@ -10,7 +10,7 @@ const Connect = () => {
   useConnectedAddrress();
 
   return (
-    <PageContainer backgroundColor={theme.palette.primary.dark}>
+    <PageContainer backgroundColor={theme.palette.primary.dark} layoutContainer={false}>
       <Grid container direction="column" justifyContent="center" alignItems="center" height="100%">
         <Grid item mb={10}>
           <MainTitle

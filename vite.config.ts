@@ -1,10 +1,16 @@
 import { fileURLToPath, URL } from "url";
-import { defineConfig } from "vite";
+/// <reference types="vitest" />
+import { defineConfig } from "vitest/config";
 import react from "@vitejs/plugin-react";
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
+  test: {
+    globals: true,
+    environment: "jsdom",
+    setupFiles: "./src/setupTests.ts",
+  },
   resolve: {
     alias: [
       {
@@ -42,6 +48,10 @@ export default defineConfig({
       {
         find: "@slices",
         replacement: fileURLToPath(new URL("./src/redux/slices", import.meta.url)),
+      },
+      {
+        find: "@helpers",
+        replacement: fileURLToPath(new URL("./src/helpers", import.meta.url)),
       },
     ],
   },

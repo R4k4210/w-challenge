@@ -24,6 +24,7 @@
     "noFallthroughCasesInSwitch": true,
     
     /* Alias */
+    "baseUrl": ".",
     "paths": {
       "@*": ["./src/*"],
       "@assets/*": ["./src/assets/*"],
@@ -34,9 +35,17 @@
       "@constants/*": ["./src/constants/*"],
       "@config/*": ["./src/config/*"],
       "@slices/*": ["./src/redux/slices/*"],
+      "@helpers/*": ["./src/helpers/*"],
       "@enums/*": ["./src/enums/*"]
-    }
+    },
 
+    "types":[
+      "jest",
+      "@testing-library/jest-dom"
+    ]
   },
-  "include": ["src"]
+  "include": [
+      "./src/**/*.*",
+      "./__tests__/**/**.*",
+  ]
 }
